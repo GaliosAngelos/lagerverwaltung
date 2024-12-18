@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-form">
+        <h1>Login</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.as_p }}  <!-- Das gesamte Formular wird hier gerendert -->
+            </div>
+            <button type="submit" class="btn-submit">Login</button>
+        </form>
+        <a class="signup-link" href="{% url 'register' %}">Noch kein Konto? Jetzt registrieren</a>
+    </div>
+</div>
+{% endblock content %}

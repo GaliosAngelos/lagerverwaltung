@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <a href="{% url 'lager_list' %}" class="btn btn-secondary mb-3">← Zurück</a>
+    <div class="card">
+        <div class="card-header">
+            <h2>Details zu Lager: {{ lager.name }}</h2>
+        </div>
+        <div class="card-body">
+            <ul class="mb-4">
+                <li class="list-group-item mb-2">
+                    <a href="{% url 'current_status' lager.id %}" class="btn btn-info w-100">Aktuellen Stand ansehen</a>
+                </li>
+                <li class="list-group-item mb-2">
+                    <a href="{% url 'transaction' lager.id %}" class="btn btn-success w-100">Warenzugang/Abgang</a>
+                </li>
+                <li class="list-group-item mb-2">
+                    <a href="{% url 'artikel_management' lager.id %}" class="btn btn-primary w-100">Artikel hinzufügen</a>
+                </li>
+                <li class="list-group-item mb-2">
+                    <a href="{% url 'grant_access' lager.id %}" class="btn btn-warning w-100">Weitere Personen zuweisen</a>
+                </li>
+            </ul>
+
+            <h3>Personen, die im Lager arbeiten können:</h3>
+            <ul class="list-group">
+                {% for person in personen %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ person.username }}
+
+                    <!-- Entfernen-Button nur für den Lagerbesitzer anzeigen -->
+                    {% if person == lager.owner %}
+                    <span class="text-muted">Der Eigentümer kann nicht entfernt werden.</span>
+                    {% elif person != request.user %}
+                    <a href="{% url 'remove_user_from_lager' lager.id person.id %}" class="btn btn-danger btn-sm">
+                        <i class="bi bi-x-circle"></i> Entfernen
+                    </a>
+                    {% else %}
+                    <span class="text-muted">Sie können sich nicht selbst entfernen.</span>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

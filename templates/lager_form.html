@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <a href="{% url 'lager_list' %}" class="btn btn-secondary mb-3">← Zurück</a>
+
+    <!-- Überschrift -->
+    <div class="text-center mb-4">
+        <h2 class="fw-bold">Neues Lager erstellen</h2>
+    </div>
+
+    <!-- Formular -->
+    <div class="card shadow p-4">
+        <form method="post">
+            {% csrf_token %}
+
+            <!-- Django-Formular -->
+            {{ form.as_p }}
+
+            <!-- Speichern-Button -->
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-success d-flex align-items-center justify-content-center">
+                    <i class="bi bi-check-circle me-2"></i> Speichern
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="signup-container">
+    <div class="signup-form">
+        <h1>Signup</h1>
+        <form method="POST">
+            {% csrf_token %}
+ <div class="form-group">
+                <label for="id_first_name">Username</label>
+                {{ form.username }}
+            </div>
+            <!-- Vorname Eingabefeld -->
+            <div class="form-group">
+                <label for="id_first_name">Vorname</label>
+                {{ form.first_name }}
+            </div>
+
+            <!-- Nachname Eingabefeld -->
+            <div class="form-group">
+                <label for="id_last_name">Nachname</label>
+                {{ form.last_name }}
+            </div>
+
+            <!-- E-Mail Eingabefeld -->
+            <div class="form-group">
+                <label for="id_email">E-Mail</label>
+                {{ form.email }}
+            </div>
+
+            <!-- Passwort Eingabefeld -->
+            <div class="form-group">
+                <label for="id_password1">Passwort</label>
+                {{ form.password1 }}
+            </div>
+
+            <!-- Passwort Bestätigung -->
+            <div class="form-group">
+                <label for="id_password2">Passwort bestätigen</label>
+                {{ form.password2 }}
+            </div>
+
+            <button type="submit" class="btn-submit">Signup</button>
+        </form>
+        <a class="signup-link" href="{% url 'login' %}">Bereits ein Konto? Login</a>
+    </div>
+</div>
+{% endblock content %}

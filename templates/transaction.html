@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+
+<div class="d-flex justify-content-between align-items-center mb-2">
+    <!-- Zurück-Button -->
+    <a href="{% url 'lager_detail' lager.id %}" class="btn btn-secondary mb-3">← Zurück</a>
+        <h2 class="fw-bold">Warenein- und Ausgang für Lager: {{ lager.name }}</h2>
+</div>
+
+
+    <!-- Formular -->
+    <div class="card shadow p-4">
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-group mb-3">
+                <label for="transaction_type" class="form-label">Transaktionstyp:</label>
+                <select name="transaction_type" id="transaction_type" class="form-control">
+                    <option value="in">Zugang (Eingang)</option>
+                    <option value="out">Abgang (Ausgang)</option>
+                </select>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="article" class="form-label">Artikel auswählen:</label>
+                <select name="article" id="article" class="form-control">
+                    {% for artikel in lager.artikel.all %}
+                    <option value="{{ artikel.id }}">{{ artikel.name }} (Aktuelle Menge: {{ artikel.menge }})</option>
+                    {% empty %}
+                    <option value="">Keine Artikel im Lager</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="quantity" class="form-label">Menge:</label>
+                <input type="number" name="quantity" id="quantity" class="form-control" min="1" required>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary d-flex align-items-center justify-content-center">
+                    <i class="bi bi-arrow-left-right me-2"></i> Transaktion durchführen
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

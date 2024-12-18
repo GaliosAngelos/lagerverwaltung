@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-2">
+<div class="d-flex justify-content-between align-items-center mb-2">
+    <!-- Zurück-Button -->
+    <a href="{% url 'lager_detail' lager.id %}" class="btn btn-secondary mb-3">← Zurück</a>
+        <h2 class="fw-bold">Aktueller Status für Lager: {{ lager.name }}</h2>
+</div>
+
+    <!-- Artikelliste -->
+    <div class="card shadow p-4">
+        <h3>Artikel:</h3>
+        <ul class="list-group">
+            {% for artikel in articles %}
+            <li class="list-group-item d-flex justify-content-between">
+                <span>{{ artikel.name }}</span>
+                <span class="badge bg-info text-dark">Menge: {{ artikel.menge }}</span>
+            </li>
+            {% empty %}
+            <p>Keine Artikel in diesem Lager vorhanden.</p>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

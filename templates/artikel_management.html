@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-2">
+    <!-- Zurück-Button -->
+
+    <!-- Überschrift -->
+   <div class="d-flex justify-content-between align-items-center mb-2">
+    <a href="{% url 'lager_detail' lager.id %}" class="btn btn-secondary">← Zurück</a>
+    <h2 class="fw-bold text-end mb-0">Artikelverwaltung für Lager: {{ lager.name }}</h2>
+</div>
+
+
+    <!-- Artikel-Liste -->
+    <div class="card shadow p-4 mb-4">
+        <h4 class="mb-4">Alle Artikel im Lager</h4>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Artikelname</th>
+                    <th>Aktuelle Menge</th>
+                    <th>Aktionen</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for artikel in artikel_list %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ artikel.name }}</td>
+                    <td>{{ artikel.menge }}</td>
+                    <td>
+                        <a href="{% url 'artikel_edit' artikel.id %}" class="btn btn-warning btn-sm">
+                            <i class="bi bi-pencil-square"></i> Bearbeiten
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">Keine Artikel im Lager</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Button zum Hinzufügen eines neuen Artikels -->
+    <div class="text-center">
+        <a href="{% url 'artikel_create' lager.id %}" class="btn btn-success">
+            <i class="bi bi-plus-circle me-2"></i> Neuen Artikel hinzufügen
+        </a>
+    </div>
+</div>
+{% endblock %}
