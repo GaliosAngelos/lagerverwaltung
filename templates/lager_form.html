@@ -2,24 +2,27 @@
 
 {% block content %}
 <div class="container mt-5">
-
+<div class="d-flex justify-content-between align-items-center mb-2">
+    <!-- Zurück-Button -->
     <a href="{% url 'lager_list' %}" class="btn btn-secondary mb-3">← Zurück</a>
-
-    <!-- Überschrift -->
-    <div class="text-center mb-4">
         <h2 class="fw-bold">Neues Lager erstellen</h2>
-    </div>
+</div>
+
 
     <!-- Formular -->
     <div class="card shadow p-4">
         <form method="post">
             {% csrf_token %}
+     <!-- Formulardaten -->
+            <div class="form-group mb-3">
+                <label for="artikel_name" class="form-label">Name vom Lager:</label>
 
-            <!-- Django-Formular -->
-            {{ form.as_p }}
+            {{ form.name }}
+            </div>
+
 
             <!-- Speichern-Button -->
-            <div class="text-center mt-3">
+            <div class="text-end mt-3">
                 <button type="submit" class="btn btn-success d-flex align-items-center justify-content-center">
                     <i class="bi bi-check-circle me-2"></i> Speichern
                 </button>

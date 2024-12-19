@@ -4,26 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="032ad890-877e-4885-9c19-8e4093887f53" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/DjangoProject.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myapp/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myapp/static/styles/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myapp/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/artikel_create.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/artikel_management.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/current_status.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/grant_access.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/lager_detail.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/lager_form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/lager_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/register.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/transaction.html" afterDir="false" />
+    <list default="true" id="032ad890-877e-4885-9c19-8e4093887f53" name="Changes" comment="implemented: Django setup, Login, all sites">
+      <change afterPath="$PROJECT_DIR$/templates/artikel_edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myapp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myapp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/artikel_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/artikel_create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/artikel_management.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/artikel_management.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/lager_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/lager_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/lager_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/lager_form.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,6 +60,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -126,11 +118,34 @@
       <workItem from="1734447238561" duration="112000" />
       <workItem from="1734510171522" duration="7000" />
       <workItem from="1734510184693" duration="372000" />
-      <workItem from="1734510562160" duration="10219000" />
+      <workItem from="1734510562160" duration="11107000" />
+      <workItem from="1734594125180" duration="850000" />
+      <workItem from="1734594983272" duration="12932000" />
     </task>
+    <task id="LOCAL-00001" summary="implemented: Django setup, Login, all sites">
+      <option name="closed" value="true" />
+      <created>1734521669494</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1734521669494</updated>
+    </task>
+    <task id="LOCAL-00002" summary="implemented: Django setup, Login, all sites">
+      <option name="closed" value="true" />
+      <created>1734521729244</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1734521729244</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="implemented: Django setup, Login, all sites" />
+    <option name="LAST_COMMIT_MESSAGE" value="implemented: Django setup, Login, all sites" />
   </component>
 </project>

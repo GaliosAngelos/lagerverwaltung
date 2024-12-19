@@ -5,19 +5,41 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import LagerForm, ArtikelForm, CustomUserCreationForm
 from .models import Lager, LagerAccess, Artikel, Transaction
 from django.contrib.auth.models import User
+from django.contrib import messages
+
 
 def register(request):
     """Registrierung eines neuen Benutzers und automatisches Login."""
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
+
+        # Überprüfen, ob das Formular gültig ist
         if form.is_valid():
-            user = form.save()
-            login(request, user)  # Automatisches Login nach der Registrierung
-            return redirect('lager_list')  # Weiterleitung nach erfolgreichem Login
+            # Hole den Benutzernamen und die E-Mail aus den Formulardaten
+            username = form.cleaned_data.get('username')
+            email = form.cleaned_data.get('email')
+
+            # Überprüfen, ob der Benutzername bereits existiert
+            if User.objects.filter(username=username).exists():
+                messages.error(request, 'Dieser Benutzername ist bereits vergeben. Bitte wähle einen anderen.')
+            # Überprüfen, ob die E-Mail-Adresse bereits existiert
+            elif User.objects.filter(email=email).exists():
+                messages.error(request, 'Diese E-Mail-Adresse ist bereits registriert. Bitte benutze eine andere.')
+            else:
+                # Wenn alles in Ordnung ist, speichern und den Benutzer einloggen
+                user = form.save()
+                login(request, user)  # Automatisches Login nach der Registrierung
+                messages.success(request, 'Du hast dich erfolgreich registriert und bist nun eingeloggt!')
+                return redirect('lager_list')  # Weiterleitung nach erfolgreichem Login
+        else:
+            # Falls das Formular ungültig ist
+            messages.error(request, 'Bitte korrigiere die Fehler im Formular.')
+
     else:
         form = CustomUserCreationForm()
 
     return render(request, 'register.html', {'form': form})
+
 
 @login_required
 def lager_create(request):
@@ -83,15 +105,31 @@ def artikel_create(request, lager_id):
 
     if request.method == 'POST':
         form = ArtikelForm(request.POST)
+
         if form.is_valid():
+            artikel_name = form.cleaned_data['name']  # Der Name des Artikels aus dem Formular
+
+            # Überprüfen, ob der Artikelname bereits im Lager existiert
+            if Artikel.objects.filter(lager=lager, name=artikel_name).exists():
+                # Fehlermeldung anzeigen, wenn der Artikelname bereits existiert
+                messages.error(request, 'Dieser Artikel existiert bereits im Lager!')
+                return render(request, 'artikel_create.html', {'form': form, 'lager': lager})
+
+            # Wenn der Artikelname nicht existiert, speichere den Artikel
             artikel = form.save(commit=False)
             artikel.lager = lager
             artikel.save()
-            return redirect('lager_detail', lager_id=lager.id)
+
+            # Erfolgreiche Nachricht
+            messages.success(request, 'Artikel wurde erfolgreich erstellt!')
+            return redirect('artikel_management', lager_id=lager.id)
+        else:
+            # Fehlerhafte Nachricht, wenn das Formular nicht gültig ist
+            messages.error(request, 'Beim Erstellen des Artikels ist ein Fehler aufgetreten.')
     else:
         form = ArtikelForm()
 
-    return render(request, 'artikel_create.html', {'form': form})
+    return render(request, 'artikel_create.html', {'form': form, 'lager': lager})
 
 @login_required
 def artikel_management(request, lager_id):
@@ -118,7 +156,8 @@ def grant_access(request, lager_id):
 
     # Stelle sicher, dass der angemeldete Benutzer der Besitzer des Lagers ist
     if lager.owner != request.user:
-        return redirect('lager_list')  # Wenn der Benutzer nicht der Eigentümer ist, zurück zur Liste
+        messages.error(request, 'Du hast keine Berechtigung, Benutzer zu diesem Lager hinzuzufügen.')
+        return redirect('lager_detail', lager_id=lager.id)  # Wenn der Benutzer nicht der Eigentümer ist, zurück zur Liste
 
     if request.method == 'POST':
         # Hole die User-ID aus dem POST-Request
@@ -128,13 +167,19 @@ def grant_access(request, lager_id):
         try:
             user = User.objects.get(id=user_id)
         except User.DoesNotExist:
-            return redirect('lager_list')  # Falls der Benutzer nicht existiert, zurück zur Lagerliste
+            messages.error(request, 'Der angegebene Benutzer existiert nicht.')
+            return redirect('lager_detail', lager_id=lager.id)  # Falls der Benutzer nicht existiert, zurück zur Lagerdetailansicht
 
-        # Füge den Benutzer dem Lager hinzu
-        lager.users.add(user)
+        # Füge den Benutzer dem Lager hinzu, falls er noch nicht zugewiesen ist
+        if user not in lager.users.all():
+            lager.users.add(user)
 
-        # Erstelle den Lager-Zugriffsdatensatz für den Benutzer (optional, falls du dies auch benötigst)
-        LagerAccess.objects.create(lager=lager, user=user)
+            # Erstelle den Lager-Zugriffsdatensatz für den Benutzer (optional, falls du dies auch benötigst)
+            LagerAccess.objects.create(lager=lager, user=user)
+
+            messages.success(request, f'Benutzer {user.username} wurde erfolgreich dem Lager zugewiesen.')
+        else:
+            messages.info(request, f'Benutzer {user.username} ist bereits dem Lager zugewiesen.')
 
         return redirect('lager_detail', lager_id=lager.id)  # Nach der Zuweisung zurück zur Lager-Detailansicht
 

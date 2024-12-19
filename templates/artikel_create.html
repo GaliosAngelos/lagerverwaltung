@@ -3,7 +3,9 @@
 {% block content %}
 <div class="container mt-4">
 
-    <div class="text-center mb-4">
+<div class="d-flex justify-content-between align-items-center mb-2">
+<a href="{% url 'artikel_management' lager.id %}" class="btn btn-secondary mb-3">← Zurück</a>
+
         <h2 class="fw-bold">Neuen Artikel zu Lager: {{ lager.name }} hinzufügen</h2>
     </div>
 
@@ -17,19 +19,13 @@
                 <label for="artikel_name" class="form-label">Artikelname:</label>
                 {{ form.name }}
             </div>
-
-            <div class="form-group mb-3">
-                <label for="beschreibung" class="form-label">Beschreibung:</label>
-                {{ form.beschreibung }}
-            </div>
-
             <div class="form-group mb-3">
                 <label for="menge" class="form-label">Menge:</label>
                 {{ form.menge }}
             </div>
 
             <!-- Speichern-Button -->
-            <div class="text-center">
+            <div class="text-right">
                 <button type="submit" class="btn btn-primary">
                     <i class="bi bi-plus-circle me-2"></i> Artikel erstellen
                 </button>

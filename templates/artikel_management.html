@@ -1,18 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container mt-2">
-    <!-- Zurück-Button -->
+<div class="container mt-5">
+    <!-- Zurück-Button und Titel bleiben oben immer sichtbar -->
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <a href="{% url 'lager_detail' lager.id %}" class="btn btn-secondary">← Zurück</a>
+        <h2 class="fw-bold text-end mb-0">Artikelverwaltung für Lager: {{ lager.name }}</h2>
+    </div>
 
-    <!-- Überschrift -->
-   <div class="d-flex justify-content-between align-items-center mb-2">
-    <a href="{% url 'lager_detail' lager.id %}" class="btn btn-secondary">← Zurück</a>
-    <h2 class="fw-bold text-end mb-0">Artikelverwaltung für Lager: {{ lager.name }}</h2>
-</div>
-
-
-    <!-- Artikel-Liste -->
-    <div class="card shadow p-4 mb-4">
+    <!-- Artikel-Liste Bereich mit Scrollfunktion -->
+    <div class="card shadow p-4 mb-4" style="height: 70vh; overflow-y: auto;">
         <h4 class="mb-4">Alle Artikel im Lager</h4>
         <table class="table table-striped">
             <thead>
@@ -30,9 +27,9 @@
                     <td>{{ artikel.name }}</td>
                     <td>{{ artikel.menge }}</td>
                     <td>
-                        <a href="{% url 'artikel_edit' artikel.id %}" class="btn btn-warning btn-sm">
+                       {% comment %} <a href="{% url 'artikel_edit' artikel.id %}" class="btn btn-warning btn-sm">
                             <i class="bi bi-pencil-square"></i> Bearbeiten
-                        </a>
+                        </a>{% endcomment %}
                     </td>
                 </tr>
                 {% empty %}
@@ -44,11 +41,12 @@
         </table>
     </div>
 
-    <!-- Button zum Hinzufügen eines neuen Artikels -->
-    <div class="text-center">
+    <!-- Button zum Hinzufügen eines neuen Artikels bleibt immer sichtbar -->
+    <div class="text mt-3">
         <a href="{% url 'artikel_create' lager.id %}" class="btn btn-success">
             <i class="bi bi-plus-circle me-2"></i> Neuen Artikel hinzufügen
         </a>
     </div>
+
 </div>
 {% endblock %}
