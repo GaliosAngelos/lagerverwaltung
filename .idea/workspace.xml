@@ -5,16 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="032ad890-877e-4885-9c19-8e4093887f53" name="Changes" comment="implemented: Django setup, Login, all sites">
-      <change afterPath="$PROJECT_DIR$/templates/artikel_edit.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myapp/migrations/0002_alter_artikel_foto.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myapp/migrations/0003_alter_artikel_foto.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DjangoProject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoProject/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DjangoProject/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoProject/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myapp/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myapp/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myapp/migrations/0002_remove_lager_created_at_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/myapp/migrations/0003_lager_users_alter_lager_name_artikel.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/myapp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myapp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myapp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/myapp/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/artikel_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/artikel_create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/artikel_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/artikel_edit.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/artikel_management.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/artikel_management.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/lager_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/lager_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/lager_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/lager_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/current_status.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/current_status.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/lager_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/lager_list.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +62,7 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.pycharm.django.structure.promotion.once.per.project&quot;: &quot;true&quot;,
     &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;handleimage&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -120,7 +128,8 @@
       <workItem from="1734510184693" duration="372000" />
       <workItem from="1734510562160" duration="11107000" />
       <workItem from="1734594125180" duration="850000" />
-      <workItem from="1734594983272" duration="12932000" />
+      <workItem from="1734594983272" duration="14910000" />
+      <workItem from="1735227279153" duration="8690000" />
     </task>
     <task id="LOCAL-00001" summary="implemented: Django setup, Login, all sites">
       <option name="closed" value="true" />
@@ -138,11 +147,40 @@
       <option name="project" value="LOCAL" />
       <updated>1734521729244</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="implemented: Django setup, Login, all sites">
+      <option name="closed" value="true" />
+      <created>1734618560735</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1734618560735</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="e9a2b6ad-cb5d-448e-8bd8-706d8db47b93" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="e9a2b6ad-cb5d-448e-8bd8-706d8db47b93">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="implemented: Django setup, Login, all sites" />

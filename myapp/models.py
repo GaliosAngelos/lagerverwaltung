@@ -24,6 +24,7 @@ class Artikel(models.Model):
     name = models.CharField(max_length=100)
     menge = models.IntegerField()
     lager = models.ForeignKey(Lager, on_delete=models.CASCADE, related_name='artikel')
+    foto = models.ImageField(upload_to='fotos/', blank=True, null=True)  # Optionales Bildfeld
 
     def __str__(self):
         return f"{self.name} (Menge: {self.menge})"

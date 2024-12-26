@@ -27,9 +27,9 @@
                     <td>{{ artikel.name }}</td>
                     <td>{{ artikel.menge }}</td>
                     <td>
-                       {% comment %} <a href="{% url 'artikel_edit' artikel.id %}" class="btn btn-warning btn-sm">
+                       <a href="{% url 'artikel_edit' lager.id artikel.id %}" class="btn btn-warning btn-sm">
                             <i class="bi bi-pencil-square"></i> Bearbeiten
-                        </a>{% endcomment %}
+                        </a>
                     </td>
                 </tr>
                 {% empty %}

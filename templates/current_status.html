@@ -1,21 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container mt-2">
-<div class="d-flex justify-content-between align-items-center mb-2">
-    <!-- Zurück-Button -->
-    <a href="{% url 'lager_detail' lager.id %}" class="btn btn-secondary mb-3">← Zurück</a>
+<div class="container mt-4">
+
+    <!-- Zurück-Button und Lagername -->
+    <div class="d-flex justify-content-between align-items-center mb-2" id="header">
+        <a href="{% url 'lager_detail' lager.id %}" class="btn btn-secondary mb-3">← Zurück</a>
         <h2 class="fw-bold">Aktueller Status für Lager: {{ lager.name }}</h2>
+    </div>
+
+   <!-- Suchfeld -->
+<div class="mb-3" id="search-field">
+    <input type="text" id="searchInput" class="form-control" placeholder="Suche nach Artikel..." onkeyup="filterArticles()" value="{{ request.GET.q }}">
 </div>
 
     <!-- Artikelliste -->
-    <div class="card shadow p-4">
+    <div class="card shadow p-4" id="artikel-list-container">
         <h3>Artikel:</h3>
-        <ul class="list-group">
+        <ul class="list-group" id="artikelList">
             {% for artikel in articles %}
-            <li class="list-group-item d-flex justify-content-between">
-                <span>{{ artikel.name }}</span>
-                <span class="badge bg-info text-dark">Menge: {{ artikel.menge }}</span>
+            <li class="list-group-item d-flex justify-content-between align-items-center artikel-item">
+                <div class="d-flex align-items-center">
+                    {% if artikel.foto and artikel.foto.url %}
+                    <img src="{{ artikel.foto.url }}" alt="Artikelbild" class="artikel-img me-3">
+                    {% else %}
+                    <i class="bi bi-box-seam text-secondary me-3" style="font-size: 2rem;"></i> <!-- Bootstrap Icon -->
+                    {% endif %}
+                    <span>{{ artikel.name|default:"Unbekannter Artikel" }}</span>
+                </div>
+                <span class="badge bg-info text-dark artikel-menge-badge">Menge: {{ artikel.menge|default:0 }}</span>
             </li>
             {% empty %}
             <p>Keine Artikel in diesem Lager vorhanden.</p>
@@ -23,4 +36,62 @@
         </ul>
     </div>
 </div>
+
+<style>
+    /* Abstand nach oben */
+    #header {
+        margin-top: 50px;  /* Hier kannst du den Abstand nach oben nach Wunsch anpassen */
+    }
+
+    /* Sticky header für Zurück-Button und Suchfeld */
+    #search-field, #header {
+        position: sticky;
+        top: 0;
+        background-color: white;  /* Hintergrundfarbe, damit sie sich abhebt */
+        z-index: 10;  /* Stellt sicher, dass der sticky Bereich immer oben bleibt */
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    /* Artikelliste soll scrollbar sein */
+    #artikel-list-container {
+        max-height: 700px;  /* Maximale Höhe für die Artikelliste */
+        overflow-y: auto;   /* Ermöglicht vertikales Scrollen */
+    }
+
+    /* Bildgröße anpassen, ohne es abzuschneiden */
+    .artikel-img {
+        width: 80px;  /* Größe des Bildes */
+        height: 80px;  /* Höhe des Bildes */
+        object-fit: contain;  /* Verhindert das Abschneiden des Bildes */
+    }
+
+    /* Stil für das Suchfeld und den Zurück-Button */
+    #searchInput {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+</style>
+
+<script>
+    // Filtert die Artikel basierend auf dem Eingabetext im Suchfeld
+    function filterArticles() {
+        var input = document.getElementById("searchInput");
+        var filter = input.value.toLowerCase();  // Text im Suchfeld
+        var list = document.getElementById("artikelList");  // Liste der Artikel
+        var items = list.getElementsByClassName("artikel-item");
+
+        for (var i = 0; i < items.length; i++) {
+            var artikelName = items[i].getElementsByTagName("span")[0].innerText.toLowerCase();  // Artikelname
+
+            // Wenn der Artikelname den Suchbegriff enthält
+            if (artikelName.indexOf(filter) > -1) {
+                items[i].style.display = "";  // Artikel anzeigen
+            } else {
+                items[i].style.display = "none";  // Artikel verstecken
+            }
+        }
+    }
+</script>
+
 {% endblock %}
