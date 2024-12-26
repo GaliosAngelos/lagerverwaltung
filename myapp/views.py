@@ -85,18 +85,27 @@ def remove_user_from_lager(request, lager_id, user_id):
 
 
 # View zum Bearbeiten eines Artikels
-def artikel_edit(request, id):
-    artikel = get_object_or_404(Artikel, id=id)
+@login_required
+def artikel_edit(request, lager_id, id):
+    """Bearbeitet einen Artikel im Lager."""
+
+    # Holt das Lager basierend auf der Lager-ID
+    lager = get_object_or_404(Lager, id=lager_id)
+
+    # Holt den Artikel basierend auf der Artikel-ID
+    artikel = get_object_or_404(Artikel, id=id, lager=lager)
 
     if request.method == 'POST':
-        form = ArtikelForm(request.POST, instance=artikel)
+        form = ArtikelForm(request.POST, request.FILES, instance=artikel)  # request.FILES für Bilder
+
         if form.is_valid():
             form.save()
-            return redirect('lager_detail', lager_id=artikel.lager.id)
+            messages.success(request, 'Artikel wurde erfolgreich bearbeitet!')
+            return redirect('artikel_management', lager_id=lager.id)
     else:
         form = ArtikelForm(instance=artikel)
 
-    return render(request, 'artikel_edit.html', {'form': form})
+    return render(request, 'artikel_edit.html', {'form': form, 'artikel': artikel, 'lager': lager})
 
 
 # View zum Hinzufügen eines neuen Artikels
@@ -104,32 +113,28 @@ def artikel_create(request, lager_id):
     lager = get_object_or_404(Lager, id=lager_id)
 
     if request.method == 'POST':
-        form = ArtikelForm(request.POST)
+
+        form = ArtikelForm(request.POST, request.FILES)  # request.FILES für Bilder
 
         if form.is_valid():
-            artikel_name = form.cleaned_data['name']  # Der Name des Artikels aus dem Formular
+            artikel_name = form.cleaned_data['name']
 
-            # Überprüfen, ob der Artikelname bereits im Lager existiert
+            # Überprüfen, ob der Artikel bereits im Lager existiert
             if Artikel.objects.filter(lager=lager, name=artikel_name).exists():
-                # Fehlermeldung anzeigen, wenn der Artikelname bereits existiert
                 messages.error(request, 'Dieser Artikel existiert bereits im Lager!')
                 return render(request, 'artikel_create.html', {'form': form, 'lager': lager})
 
-            # Wenn der Artikelname nicht existiert, speichere den Artikel
             artikel = form.save(commit=False)
             artikel.lager = lager
             artikel.save()
 
-            # Erfolgreiche Nachricht
             messages.success(request, 'Artikel wurde erfolgreich erstellt!')
             return redirect('artikel_management', lager_id=lager.id)
-        else:
-            # Fehlerhafte Nachricht, wenn das Formular nicht gültig ist
-            messages.error(request, 'Beim Erstellen des Artikels ist ein Fehler aufgetreten.')
     else:
         form = ArtikelForm()
 
     return render(request, 'artikel_create.html', {'form': form, 'lager': lager})
+
 
 @login_required
 def artikel_management(request, lager_id):
@@ -207,23 +212,33 @@ def lager_detail(request, lager_id):
     }
     return render(request, 'lager_detail.html', context)
 
+from django.db.models import Q
 
 @login_required
 def current_status(request, lager_id):
-    """Zeigt den aktuellen Status aller Artikel eines Lagers."""
+    """Zeigt den aktuellen Status aller Artikel eines Lagers mit Bild oder Standard-Icon."""
     lager = get_object_or_404(Lager, id=lager_id)
 
     # Zugriffsprüfung
     if request.user not in lager.users.all():
         return redirect('lager_list')
 
-    # Artikel des Lagers abrufen und nach Beständen sortieren
-    articles = lager.artikel.all()
+    # Hole den Suchparameter aus der URL
+    search_query = request.GET.get('q', '')  # Der Parameter q
+    if search_query:
+        # Filtere nach Artikeln, die den Suchbegriff enthalten
+        articles = lager.artikel.filter(
+            Q(name__icontains=search_query) & Q(menge__gt=0)
+        )
+    else:
+        # Wenn kein Suchbegriff, zeige alle Artikel mit Bestand > 0
+        articles = lager.artikel.filter(menge__gt=0)
 
-    # Sicherstellen, dass nur Artikel mit einem Bestand größer als 0 angezeigt werden (optional)
-    articles = articles.filter(menge__gt=0)
+    return render(request, 'current_status.html', {
+        'lager': lager,
+        'articles': articles,
+    })
 
-    return render(request, 'current_status.html', {'lager': lager, 'articles': articles})
 
 
 # Wareneingang oder -ausgang

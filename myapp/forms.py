@@ -35,7 +35,10 @@ class LagerForm(forms.ModelForm):
 class ArtikelForm(forms.ModelForm):
     class Meta:
         model = Artikel
-        fields = ['name', 'menge']
+        fields = ['name', 'menge', 'foto']
+
+    # Optionales Bildfeld bleibt im Formular leer, wenn kein Bild hochgeladen wird
+    foto = forms.ImageField(required=False)  # optionales Fotofeld
 
 
 class TransactionForm(forms.ModelForm):

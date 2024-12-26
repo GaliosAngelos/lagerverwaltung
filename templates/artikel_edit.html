@@ -21,20 +21,20 @@
             {% csrf_token %}
             <div class="mb-3">
                 <label for="name" class="form-label">Artikelname</label>
-                {{ form.name|as_crispy_field }}
+                {{ form.name }}
             </div>
             <div class="mb-3">
                 <label for="menge" class="form-label">Menge</label>
-                {{ form.menge|as_crispy_field }}
+                {{ form.menge }}
             </div>
             <div class="mb-3">
                 <label for="bild" class="form-label">Artikelbild</label>
-                {% if artikel.bild %}
+                {% if artikel.foto %}
                     <div class="mb-2">
-                        <img src="{{ artikel.bild.url }}" alt="{{ artikel.name }}" class="img-thumbnail" style="max-height: 200px;">
+                        <img src="{{ artikel.foto.url }}" alt="{{ artikel.name }}" class="img-thumbnail" style="max-height: 200px;">
                     </div>
                 {% endif %}
-                {{ form.bild|as_crispy_field }}
+                {{ form.foto }}
             </div>
             <button type="submit" class="btn btn-primary">Speichern</button>
         </form>

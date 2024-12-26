@@ -11,7 +11,7 @@
 
     <!-- Formular -->
     <div class="card shadow p-4">
-        <form method="POST">
+        <form method="POST"  enctype="multipart/form-data">
             {% csrf_token %}
 
             <!-- Formulardaten -->
@@ -23,6 +23,11 @@
                 <label for="menge" class="form-label">Menge:</label>
                 {{ form.menge }}
             </div>
+            <div class="form-group mb-3">
+                <label for="foto" class="form-label">Artikelbild:</label>
+                {{ form.foto }}
+            </div>
+
 
             <!-- Speichern-Button -->
             <div class="text-right">

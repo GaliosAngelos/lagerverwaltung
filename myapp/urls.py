@@ -4,7 +4,6 @@ from . import views
 from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
-
     # Login
     path('', auth_views.LoginView.as_view(
         template_name='login.html',
@@ -47,3 +46,4 @@ urlpatterns = [
     # Artikel bearbeiten (geschützt)
     path('lager/<int:lager_id>/artikel_management/<int:id>/edit/', login_required(views.artikel_edit), name='artikel_edit'),
 ]
+
