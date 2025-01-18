@@ -41,41 +41,32 @@ Das Lagerverwaltungssystem ist eine webbasierte Anwendung zur Verwaltung von Lag
   - Transaktionen können für spätere Referenzen gespeichert werden, um Änderungen im Lagerbestand nachzuverfolgen.
 
 ---
+# Lagerverwaltungsprogramm
 
-## **Technischer Aufbau**
+Dies ist ein Lagerverwaltungsprogramm, das es Benutzern ermöglicht, Artikel in Lägern zu verwalten, Benutzer zuzuweisen, Transaktionen durchzuführen und vieles mehr.
 
-### **1. Backend**
-- **Framework:** Django (Python-basiertes Webframework)
-- **Datenbankmodell:**
-  - **Lager:** Enthält Informationen zu jedem Lager, wie Name und Besitzer.
-  - **Artikel:** Artikel sind einem Lager zugeordnet und haben Attribute wie Name, Beschreibung und Menge.
-  - **Benutzer:** Benutzer können Lager erstellen und gemeinsam verwalten.
-  - **Lagerzugriff (LagerAccess):** Speichert die Beziehung zwischen Benutzern und Lagern.
-  - **Transaktionen:** Dokumentieren die Änderungen im Lagerbestand.
+## **Voraussetzungen**
 
-### **2. Frontend**
-- **HTML/CSS:** Bootstrap für ein ansprechendes, responsives Design.
-- **Templates:** Django-Templates für dynamische HTML-Seiten.
-- **Icons:** Bootstrap Icons für Buttons und visuelle Hinweise.
+- **Python 3.10 oder höher** (Falls noch nicht installiert: [Download Python](https://www.python.org/downloads/))
+- **Virtuelle Umgebung** (Empfohlen, um Abhängigkeiten zu isolieren)
+- **Git** (Falls das Repository per Git geklont werden soll)
+- **Installierte Python-Abhängigkeiten** aus `requirements.txt`
 
-### **3. Sicherheitsfeatures**
-- **Benutzerauthentifizierung:**
-  - Nur registrierte und angemeldete Benutzer können auf das System zugreifen.
-- **Berechtigungsprüfung:**
-  - Nur der Besitzer eines Lagers kann Benutzer hinzufügen oder entfernen.
-  - Benutzer können nur auf Lager zugreifen, denen sie zugewiesen sind.
+## **Schritte zur Ausführung des Projekts**
 
----
+### 1. **Repository klonen**
 
-## **Wie man das Projekt ausführt**
+Klonen Sie das Projekt-Repository auf Ihrem lokalen Rechner:
+```bash
+git clone git@github.com:GaliosAngelos/lagerverwaltung.git lagerverwaltungsprogramm
+```
+## Hinweise zur Einrichtung
 
-### **Voraussetzungen**
-- Python 3.10 oder höher
-- Virtuelle Umgebung (empfohlen)
-- Installierte Python-Abhängigkeiten aus `requirements.txt`
+### Hinweis:
+Falls Sie **Git** nicht installiert haben, können Sie es [hier herunterladen](https://git-scm.com/).
 
-### **Schritte**
-1. **Repository klonen:**
-   ```bash
-   git clone <repository-url>
-   cd lagerverwaltung
+### 2. In das Projektverzeichnis wechseln
+
+Wechseln Sie in das Verzeichnis des geklonten Projekts:
+```bash
+cd lagerverwaltungsprogramm
