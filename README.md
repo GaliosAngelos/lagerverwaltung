@@ -37,8 +37,6 @@ Das Lagerverwaltungssystem ist eine webbasierte Anwendung zur Verwaltung von Lag
 ### **4. Transaktionen**
 - **Wareneingang und -ausgang:**
   - Benutzer können Transaktionen für Artikel durchführen, z. B. die Menge erhöhen (Eingang) oder verringern (Ausgang).
-- **Protokollierung (optional):**
-  - Transaktionen können für spätere Referenzen gespeichert werden, um Änderungen im Lagerbestand nachzuverfolgen.
 
 ---
 # Lagerverwaltungsprogramm
