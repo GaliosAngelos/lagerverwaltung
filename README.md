@@ -110,3 +110,4 @@ http://127.0.0.1:8000/
 
 ### 7. Benutzer registrieren und einloggen
 Sie können sich als neuer Benutzer registrieren, indem Sie auf die Registrierungsseite gehen, oder sich mit einem bestehenden Benutzerkonto einloggen, um mit der Lagerverwaltungssoftware zu arbeiten.
+Registerseite: http://127.0.0.1:8000/register
