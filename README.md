@@ -63,8 +63,50 @@ git clone git@github.com:GaliosAngelos/lagerverwaltung.git lagerverwaltungsprogr
 ### Hinweis:
 Falls Sie **Git** nicht installiert haben, können Sie es [hier herunterladen](https://git-scm.com/).
 
-### 2. In das Projektverzeichnis wechseln
+### 2. Virtuelle Umgebung erstellen (optional, aber empfohlen). 
+Navigieren Sie in das Verzeichnis des Projekts und erstellen Sie eine virtuelle Umgebung:
 
 Wechseln Sie in das Verzeichnis des geklonten Projekts:
 ```bash
-cd lagerverwaltungsprogramm
+python -m venv venv
+```
+Aktivieren Sie dann die virtuelle Umgebung:
+  - Auf Windows:
+```bash
+.\venv\Scripts\activate
+```
+  - Auf macOS/Linux:
+```bash
+source venv/bin/activate
+```
+### 3. Abhängigkeiten installieren
+Installieren Sie alle notwendigen Python-Abhängigkeiten mit dem folgenden Befehl:
+
+```bash
+pip install -r requirements.txt
+```
+Dieser Befehl installiert alle Bibliotheken, die für das Projekt erforderlich sind, einschließlich Django und anderer Abhängigkeiten.
+
+### 4. Datenbank migrieren
+Führen Sie die Django-Datenbankmigrationen aus, um die benötigten Tabellen in der Datenbank zu erstellen:
+
+```bash
+python manage.py migrate
+```
+
+### 5. Entwicklungsserver starten
+Starten Sie den Django-Entwicklungsserver mit dem folgenden Befehl:
+
+```bash
+python manage.py runserver
+```
+Dies startet den Server auf http://127.0.0.1:8000/ oder http://localhost:8000/, und Sie können die Anwendung in Ihrem Webbrowser aufrufen.
+
+### 6. Zugang zur Anwendung
+Öffnen Sie einen Webbrowser und geben Sie die folgende Adresse ein:
+```ardulino
+http://127.0.0.1:8000/
+```
+
+### 7. Benutzer registrieren und einloggen
+Sie können sich als neuer Benutzer registrieren, indem Sie auf die Registrierungsseite gehen, oder sich mit einem bestehenden Benutzerkonto einloggen, um mit der Lagerverwaltungssoftware zu arbeiten.
